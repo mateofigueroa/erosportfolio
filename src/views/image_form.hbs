@@ -55,7 +55,9 @@
 
                         <a href="{{imageURL}}" target="_blank" class="btn btn-primary" style="margin: 10px;"> Ver </a>
 
-                        <a href="" class="btn btn-danger" action="/deleteItem/:id" method="DELETE" style="margin: 10px;"> Borrar </a>
+                        <form method="POST" action="/images/{{public_id}}?_method=DELETE">
+                            <a class="btn btn-danger" onclick="parentNode.submit()" style="margin: 10px;"> Borrar </a>
+                        </form>
                     </td>
 
                 </tr>

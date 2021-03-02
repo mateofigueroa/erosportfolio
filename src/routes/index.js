@@ -35,15 +35,12 @@ router.post('/images/add', async (req, res) => {
     res.send('Received');
 })
 
-router.delete('/deleteItem/:id', (req, res) => {
+router.delete('/images/:public_id', async (req, res) => {
     const id = req.params.public_id;
-    const photos = body
 
-    photos.filter(element => {
-        if (element.public_id == id) {
-            fs.unlink(element)
-        }
-    })
+    Photo.findOneAndDelete({public_id: id}, function (err){
+        if(err) console.error(err);
+    });
     
     res.send('Deleted');
 

@@ -2,6 +2,8 @@ const express = require('express');
 
 const morgan = require('morgan');
 
+const methodOverride = require('method-override');
+
 const multer = require('multer');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -12,6 +14,7 @@ const Handlebars = require('handlebars');
 
 const app = express();
 require('./database');
+app.use(methodOverride('_method'));
 
 //Configuraciones
 
