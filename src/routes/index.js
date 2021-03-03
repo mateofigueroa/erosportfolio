@@ -22,17 +22,20 @@ router.get('/images/add', async (req, res) => {
 });
 
 router.post('/images/add', async (req, res) => {
-    const { title, description } = req.body;
+    const { title, name, technique, size, date } = req.body;
     const result = await cloudinary.v2.uploader.upload(req.file.path);
     const newPhoto = new Photo({
         title,
-        description,
+        name,
+        technique,
+        size,
+        date,
         imageURL: result.url,
         public_id: result.public_id
     });
     await newPhoto.save();
     await fs.unlink(req.file.path);
-    res.send('Received');
+    res.redirect(req.get('referer'));
 })
 
 router.delete('/images/:public_id', async (req, res) => {
@@ -42,7 +45,8 @@ router.delete('/images/:public_id', async (req, res) => {
         if(err) console.error(err);
     });
     
-    res.send('Deleted');
+    
+    res.redirect(req.get('referer'));
 
 });
 
