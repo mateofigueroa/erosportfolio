@@ -1,0 +1,28 @@
+<div class="row">
+
+    <div class="col -md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="/profile/introduction" method="POST" enctype="multipart/form-data">
+
+                    {{!-- título y introducción al portfolio --}}
+                    <input type="text" name="title" class="form-control" placeholder="Título de la obra">
+
+
+
+                    <textarea class="form-control" style="margin-bottom: 30px;" name="description"
+                        placeholder="Introducción al Portfolio"></textarea>
+
+
+
+
+
+                    <button class="btn btn-dark">
+                        Actualizar introducción
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

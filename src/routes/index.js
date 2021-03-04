@@ -10,15 +10,23 @@ cloudinary.config({
 });
 
 const fs = require('fs-extra');
+const Introduction = require('../models/Introduction');
 
 router.get('/', async (req, res) => {
     const photos = await Photo.find();
-    res.render('images', { photos });
+    const introduction = await Introduction.find();
+    
+    res.render('introduction', { introduction });
 })
 
 router.get('/images/add', async (req, res) => {
     const photos = await Photo.find();
     res.render('image_form', { photos });
+});
+
+router.get('/profile', async (req, res) => {
+    const introduction = await Introduction.find();
+    res.render('profile', { introduction });    
 });
 
 router.post('/images/add', async (req, res) => {
@@ -38,14 +46,26 @@ router.post('/images/add', async (req, res) => {
     res.redirect(req.get('referer'));
 })
 
+router.post('/profile/introduction', async (req, res) => {
+    const { title, description } = req.body;
+    const newIntroduction = new Introduction({
+        title,
+        description
+    });
+    await newIntroduction.save();
+    res.redirect(req.get('referer'));
+    // res.send('up');
+})
+
+
 router.delete('/images/:public_id', async (req, res) => {
     const id = req.params.public_id;
 
-    Photo.findOneAndDelete({public_id: id}, function (err){
-        if(err) console.error(err);
+    Photo.findOneAndDelete({ public_id: id }, function (err) {
+        if (err) console.error(err);
     });
-    
-    
+
+
     res.redirect(req.get('referer'));
 
 });
