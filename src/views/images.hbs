@@ -1,29 +1,38 @@
+<div>
+
+
+    <h3 style="color: #3d3d3d; font-size:40px; margin-bottom: 35px;">{{introduction.title}}</h3>
+    <p style="color: #3d3d3d; margin-bottom: 55px;; font-size:15px;">{{introduction.description}}</p>
+
+
+</div>
+
 {{#each photos}}
 
-<div style="background-color:#c2c2c28c; margin:15px; padding:15px 15px; position:relative ">
-    
-    <div style="display: flex;  align-content:flex-end;">
+    <div style="background-color:#c2c2c28c; margin:15px; padding:15px 15px; position:relative ">
 
-        <img src="{{imageURL}}" alt="" style="display:flex; justify-content:center; width: 500px; padding:7px;  ">
+        <div style="display: flex;  align-content:flex-end;">
+
+            <img src="{{imageURL}}" alt="" style="display:flex; justify-content:center; width: 500px; padding:7px;  ">
 
 
-        <div style="display: flex; flex-direction:column; margin: 20px;">
+            <div style="display: flex; flex-direction:column; margin: 20px;">
 
-            <h3 style="display: flex; margin-top:130px; color: #3d3d3d">{{title}}</h3>
+                <h3 style="display: flex; margin-top:130px; color: #3d3d3d">{{title}}</h3>
 
-            <div style="max-width: 20vw;">
-                <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;" >{{name}}</p>
-                <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{technique}}</p>
-                <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{size}}</p>
-                <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{date}}</p>
+                <div style="max-width: 20vw;">
+                    <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{name}}</p>
+                    <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{technique}}</p>
+                    <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{size}}</p>
+                    <p style="color: #3d3d3d; margin-bottom:5px; font-size:15px;">{{date}}</p>
+                </div>
+
             </div>
+
 
         </div>
 
 
     </div>
-
-
-</div>
 
 {{/each}}

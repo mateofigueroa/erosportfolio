@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = Router();
 
 const Photo = require('../models/Photo');
@@ -14,23 +14,23 @@ const Introduction = require('../models/Introduction');
 
 router.get('/', async (req, res) => {
     const photos = await Photo.find();
-    const introduction = await Introduction.find();
-    
-    res.render('introduction', { introduction });
+    const introduction = await Introduction.findOne();
+
+    res.render('images',  {photos, introduction});
 })
 
 router.get('/images/add', async (req, res) => {
     const photos = await Photo.find();
-    res.render('image_form', { photos });
+    res.render('image_form', {photos});
 });
 
 router.get('/profile', async (req, res) => {
     const introduction = await Introduction.find();
-    res.render('profile', { introduction });    
+    res.render('profile', {introduction});
 });
 
 router.post('/images/add', async (req, res) => {
-    const { title, name, technique, size, date } = req.body;
+    const {title, name, technique, size, date} = req.body;
     const result = await cloudinary.v2.uploader.upload(req.file.path);
     const newPhoto = new Photo({
         title,
@@ -47,12 +47,17 @@ router.post('/images/add', async (req, res) => {
 })
 
 router.post('/profile/introduction', async (req, res) => {
-    const { title, description } = req.body;
+    const {title, description} = req.body;
     const newIntroduction = new Introduction({
         title,
         description
     });
+
+
     await newIntroduction.save();
+    // let check = await Introduction.find();
+
+
     res.redirect(req.get('referer'));
     // res.send('up');
 })
@@ -61,7 +66,7 @@ router.post('/profile/introduction', async (req, res) => {
 router.delete('/images/:public_id', async (req, res) => {
     const id = req.params.public_id;
 
-    Photo.findOneAndDelete({ public_id: id }, function (err) {
+    Photo.findOneAndDelete({public_id: id}, function (err) {
         if (err) console.error(err);
     });
 
